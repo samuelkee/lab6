@@ -25,6 +25,14 @@ function addProjectDetails(e) {
 	var projectID = $(this).closest('.project').attr('id');
 	// get rid of 'project' from the front of the id 'project3'
 	var idNumber = projectID.substr('project'.length);
-
+	var pURL = $.get("https://samuelkee-lab6.herokuapp.com/project/" + idNumber, callBackFunc);
 	console.log("User clicked on project " + idNumber);
+	console.log("Project URL " + pURL);
+}
+
+function callBackFunc(result) {
+    $("#project" + result.id + " .details").append("<p>" + result.title + "</p");
+    $("#project" + result.id + " .details").append("<p>" + result.date + "</p");
+    $("#project" + result.id + " .details").append("<img class=\"detailsImage\", src=\"" + result.image + "\"></img>");
+    $("#project" + result.id + " .details").append(result.summary);
 }
